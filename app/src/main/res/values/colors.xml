@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_bg_color">#222222</color>
+    <color name="list_bg_color_active">#2300BCD4</color>
+    <color name="list_bg_color_in_actice">#222222</color>
+    <color name="list_text_color_active">#33d6ff</color>
+    <color name="list_text_color_in_active">#808080</color>
+    <color name="rectangle_border_color">#33d6ff</color>
+    <color name="horizontal_line">#8F8D8D8D</color>
+    <color name="list_time">#E4E4E4</color>
+</resources>

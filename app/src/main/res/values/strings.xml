@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">toggle</string>
+    <string name="list_padding">20pd</string>
+    <string name="list_margin">20pd</string>
+</resources>
