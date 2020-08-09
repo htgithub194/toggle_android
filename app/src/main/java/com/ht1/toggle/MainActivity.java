@@ -35,6 +35,6 @@ public class MainActivity extends Activity {
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(model.getWebAppInterface(), "Android");
-        webView.loadUrl("http://192.168.1.7:3000/");
+        webView.loadUrl("http://192.168.1.8:3000/");
     }
 }

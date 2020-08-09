@@ -36,16 +36,16 @@ public class WebAppInterface {
         try {
             JSONObject reader = new JSONObject(stJSON);
 
-            String id = reader.getString("id");
+            String id = reader.getString("type");
             Log.d(TAG, "id: " + id);
 
             if(id.equals("get")) {
                 sendUdpThread.sendUDP_get();
             }
 
-            if(id.equals("tog")) {
-                String dev = reader.getString("dev");
-                String stt = reader.getString("stt");
+            if(id.equals("toggle")) {
+                String dev = reader.getString("id");
+                String stt = reader.getString("status");
                 sendUdpThread.sendUDP("tog " + dev + " " + stt);
             }
 
@@ -55,22 +55,9 @@ public class WebAppInterface {
                 model.storePreference(Model.PREFERENCE_GROUP, strGroup);
             }
 
-//            if(id.equals("lgr")) {
-//                String strGr = model.loadPreference(Model.PREFERENCE_GROUP);
-//                Log.d(TAG, "lgr: " + strGr);
-//                runJsScript("javascript:document.setGroupList('" + strGr + "')");
-//            }
-//
-//            if(id.equals("ldn")) {
-//                String str = model.loadPreference(Model.PREFERENCE_DEVICE_NAME);
-//                Log.d(TAG, "ldn: " + str);
-//                runJsScript("javascript:document.setDeviceList('" + str + "')");
-//            }
-
-            if(id.equals("ini")) {
-                String strGr = model.loadPreference(Model.PREFERENCE_GROUP);
-                String strDev = model.loadPreference(Model.PREFERENCE_DEVICE_NAME);
-                runJsScript("javascript:document.init(" + strGr + "," + strDev + ")");
+            if(id.equals("init")) {
+//                String strDev = model.loadPreference(Model.PREFERENCE_DEVICE_NAME);
+                runJsScript("javascript:document.Android.eventToHMI({invoke: 'initAndroid', data:null)})");
             }
 
             if(id.equals("sdn")) {

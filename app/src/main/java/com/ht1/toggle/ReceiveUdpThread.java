@@ -36,6 +36,7 @@ class ReceiveUdpThread extends Thread {
 
         try {
             socketIN = new DatagramSocket();
+            Log.d(TAG, "SOCKETIN PORT: " + getSocketInPort());
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(context, "Co loi xay ra, xin khoi dong lai!", Toast.LENGTH_LONG).show();
@@ -54,8 +55,10 @@ class ReceiveUdpThread extends Thread {
                 Log.d(TAG, "receive: " + text);
 
                 String[] separated = text.split("#");
+                Log.d(TAG, "separated.length: " + separated.length);
+                Log.d(TAG, "separated.length: " + separated[0]);
                 if (separated.length > 0 && separated[0].equals("ACK")) {
-
+                    Log.d(TAG, "ACK OK");
                     // WIFI
                     if (separated.length > 1 && separated[1].equals("wif")) {
                         String strWifiList = text.substring(new String("ACK#wif#").length());
@@ -95,14 +98,15 @@ class ReceiveUdpThread extends Thread {
                         Log.d(TAG, "newDev: " + packetIN.getAddress().toString().substring(1));
 
                         JSONObject json = new JSONObject();
-                        json.put("realName", cmd[0]);
-                        json.put("isSttOn", cmd[1].equals(STT_ON));
+                        json.put("id", cmd[0]);
+                        json.put("status", cmd[1].equals(STT_ON));
                         json.put("ip", packetIN.getAddress().toString().substring(1));
 
                         array.put(json);
                     }
                     // notify to HMI device list changed
-                    runJsScript("javascript:document.setDeviceList(" + array.toString() + ")");
+                    Log.d(TAG, "javascript:document.Android.eventToHMI(invoke: 'updateListDevices', data:" + array.toString() + ")");
+                        runJsScript("javascript:document.Android.eventToHMI({invoke: 'updateListDevices', data:" + array.toString() + "})");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
